@@ -16,7 +16,7 @@ func TestGetUser(t *testing.T) {
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 
-	h := controller.UserHandler{} // Simulasikan controller
+	h := controller.UserHandler{}
 	err := h.GetUser(c)
 
 	assert.NoError(t, err)

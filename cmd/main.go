@@ -45,9 +45,6 @@ func main() {
 	userService := service.NewUserService(userRepo)
 	userHandler := controller.NewUserHandler(userService)
 
-	// Connect to database
-	//db := config.ConnectDB()
-
 	// Register routes
 	routesGroup := e.Group("/v1")
 	routes.UserRoutes(routesGroup, userHandler)
