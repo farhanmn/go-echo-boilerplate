@@ -24,7 +24,7 @@ func (s *UserService) CreateUser(user *model.User) (*model.User, error) {
 	if err != nil {
 		return nil, err
 	}
-	newData := &model.User{
+	newData := model.User{
 		Name:     user.Name,
 		Email:    user.Email,
 		Password: hashPassword,

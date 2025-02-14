@@ -15,28 +15,28 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 }
 
 func (r *UserRepository) GetUserByID(ID uint) (*model.User, error) {
-	user := &model.User{}
+	user := model.User{}
 	err := r.DB.Where("id = ?", ID).First(&user).Error
 
 	if err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return &user, nil
 }
 
 func (r *UserRepository) GetUserByEmail(email string) (*model.User, error) {
-	user := &model.User{}
+	user := model.User{}
 	err := r.DB.Where("email = ?", email).First(&user).Error
 
 	if err != nil {
 		return nil, err
 	}
-	return user, nil
+	return &user, nil
 }
 
-func (r *UserRepository) CreateUser(user *model.User) (*model.User, error) {
-	data := &model.User{}
+func (r *UserRepository) CreateUser(user model.User) (*model.User, error) {
+	data := model.User{}
 
 	err := r.DB.Create(&user).Error
 
@@ -51,13 +51,13 @@ func (r *UserRepository) CreateUser(user *model.User) (*model.User, error) {
 		return nil, errId
 	}
 
-	data = id
+	data = *id
 
-	return data, nil
+	return &data, nil
 }
 
 func (r *UserRepository) LoginUser(user *model.User) (*model.User, error) {
-	data := &model.User{}
+	data := model.User{}
 	err := r.DB.
 		Select("id, name, email, password, salt").
 		Where("email = ?", &user.Email).
@@ -68,5 +68,5 @@ func (r *UserRepository) LoginUser(user *model.User) (*model.User, error) {
 		return nil, err
 	}
 
-	return data, nil
+	return &data, nil
 }
