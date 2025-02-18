@@ -1,2 +1,6 @@
 .idea
 .env
+
+.DS_Store
+internal/.DS_Store
+pkg/.DS_Store
